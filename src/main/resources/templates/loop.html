@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Loop</title>
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<body>
+	<div id="example"></div>
+	<table id="list">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>이름</th>
+				<th>전화번호</th>
+				<th>주소</th>
+			</tr>
+		</thead>
+		<tbody id="contacts">
+			<tr v-for="contact in contacts">
+				<td>{{contact.no}}</td>
+				<td>{{contact.name}}</td>
+				<td>{{contact.tel}}</td>
+				<td>{{contact.address}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script>
+		var model = {
+			contacts : [
+					{ "no" : 1, "name" : "설현", "tel" : "010-1111-2222", "address" : "서울" },
+					{ "no" : 2, "name" : "귀찮", "tel" : "010-1111-3333", "address" : "서울" },
+					{ "no" : 3, "name" : "네이버", "tel" : "010-1111-2322", "address" : "경기" },
+					{ "no" : 4, "name" : "설현2", "tel" : "010-1111-2252", "address" : "부산" },
+					{ "no" : 7, "name" : "설현3", "tel" : "010-1111-6662", "address" : "서울" },
+					{ "no" : 6, "name" : "설현4", "tel" : "010-1111-7772", "address" : "경기" },
+					{ "no" : 5, "name" : "카카오", "tel" : "010-1111-9922", "address" : "충남" }
+				]
+		};
+
+		var list = new Vue({
+			el : "#contacts",
+			data : model
+		});
+	</script>
+</body>
+</html>

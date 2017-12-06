@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Condition (v-if, v-show, v-else, v-else-if)</title>
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<body>
+	<div id="account">
+		금액 ~~~~~~ : <input type="text" v-model="amount" />
+		<img v-if="amount < 0" src="/img/ryon.gif" title="음수는 불가" />
+	</div>
+
+	<div id="balance">
+		잔고 : <input type="text" v-model="balance" />
+		<span v-if="balance >= 10000">Gold</span>
+		<span v-else-if="balance >= 5000">Silver</span>
+		<span v-else-if="balance >= 2000">Bronze</span>
+		<span v-else>Basic</span>
+	</div>
+
+	<script>
+		var account = new Vue({
+			el : "#account",
+			data : {
+				amount : 0
+			}
+		});
+
+		var balance = new Vue({
+			el : "#balance",
+			data : {
+				balance : 0
+			}
+		});
+	</script>
+</body>
+</html>
