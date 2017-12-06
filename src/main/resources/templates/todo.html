@@ -3,8 +3,76 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Todo List Vue.js</title>
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
 </head>
 <body>
-Vue.js
+	<div id="simple">
+		<h2>{{message}}</h2>
+		<h2 v-text="message2"></h2>
+		<h2 v-html="message3"></h2>
+	</div>
+	<div id="simpleBind">
+		<input id="a" type="text" v-bind:value="message"/>
+		<img v-bind:src="imagePath"/>
+	</div>
+	<div id="duplex">
+		<input type="text" v-model="message" placeholder="아무거나 입력하세요."/>
+		입력된 값 : <h2 v-html="message"></h2>
+	</div>
+	<div id="checkList">
+		<div>선택하세요.</div>
+		<input type="checkbox" value="1" v-model="fruits"/>사과,
+		<input type="checkbox" value="2" v-model="fruits"/>키위,
+		<input type="checkbox" value="3" v-model="fruits"/>포도,
+		<input type="checkbox" value="4" v-model="fruits"/>수박,
+		<input type="checkbox" value="5" v-model="fruits"/>참외
+	</div>
+	<div id="checkListShow">
+		선택된 과일들 : <span v-html="fruits"></span>
+	</div>
+
+	<script>
+		var model = {
+			message : "첫 번째 Vue.js 입니다.",
+			message2 : "<i>HTML태그는 어찌됨</i>",
+			message3 : "<i>HTML태그는 어찌됨2</i>"
+		};
+
+		var simple = new Vue({
+			el : "#simple",
+			data : model
+		});
+
+		var bindModel = {
+		    message : "호호호호호",
+			imagePath : "https://i.pinimg.com/736x/02/a4/db/02a4dbcf400b4d8902e932f266be86d2--gif.jpg"
+		};
+
+		var simpleBind = new Vue({
+			el : "#simpleBind",
+			data : bindModel
+		});
+
+		var duplex = new Vue({
+			el : "#duplex",
+			data : {
+			    message : "처음..."
+			}
+		});
+
+		var checkListModel = {
+		    fruits : []
+		};
+
+		var checkList = new Vue({
+			el : "#checkList",
+			data : checkListModel
+		});
+
+		var checkListShow = new Vue({
+			el : "#checkListShow",
+			data : checkListModel
+		});
+	</script>
 </body>
 </html>
