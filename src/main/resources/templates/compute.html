@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Loop</title>
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<body>
+	<div id="sumDiv">
+		<input type="text" v-model="num"/><br/>
+		SUM : <span v-text="sum"></span><br/>
+		SUM2 : <span>{{sum2()}}</span><br/>
+		SUM3 : <span>{{fArrow()}}</span>
+	</div>
+
+<script>
+	var sumVue = new Vue({
+		el : "#sumDiv",
+		data : {
+			num : 0
+		},
+		computed : {
+			sum : function() {
+				console.log(Date.now()); // 직접 접근시 호출X 캐싱된값 리턴
+
+				var nNum = Number(this.num);
+				if (isNaN(nNum) || nNum < 1) {
+					return 0;
+				}
+
+				return (1 + nNum) * nNum / 2;
+			}
+		},
+		methods : {
+			sum2 : function() {
+				console.log(Date.now(), this); // 직접 접근시 매번 호출
+
+				var nNum = Number(this.num);
+				if (isNaN(nNum) || nNum < 1) {
+					return 0;
+				}
+
+				return (1 + nNum) * nNum / 2;
+			},
+			// ecma6 문법인 arrow function은 this가 window다 ㅠㅠ 주의
+			fArrow : () => { console.log(this); return this.num; }
+		}
+	});
+</script>
+</body>
+</html>

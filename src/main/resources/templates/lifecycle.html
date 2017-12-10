@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Loop</title>
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<body>
+<div id="example">
+	<input type="text" v-model="num"/>
+</div>
+
+<script>
+	new Vue({
+		el : "#example",
+		data : { num : 0 },
+		beforeCreate : function(){
+			console.log("before create");
+		},
+		created : function () {
+			console.log("created", this.num);
+		},
+		beforeMount : function() {
+			console.log("before mount");
+		},
+		mounted : function() {
+			console.log("mount");
+		},
+		beforeUpdate : function () {
+			console.log("before update", this.num);
+		},
+		updated : function() {
+			console.log("updated", this.num);
+		},
+		beforeDestroyed : function() {
+			console.log("before destoryed");
+		},
+		destroyed : function () {
+			console.log("destroyed");
+		}
+
+	});
+</script>
+</body>
+</html>

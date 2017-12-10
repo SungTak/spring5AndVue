@@ -26,6 +26,13 @@
 		</tbody>
 	</table>
 
+	<div id="objectProperties">
+		<select id="regions">
+			<option disabled="disabled" selected>지역을 선택하세요.</option>
+			<option v-for="(val, key) in regions" v-bind:value="key" v-text="val"></option>
+		</select>
+	</div>
+
 	<script>
 		var model = {
 			contacts : [
@@ -42,6 +49,20 @@
 		var list = new Vue({
 			el : "#contacts",
 			data : model
+		});
+
+		var regions = {
+			"A" : "Asia",
+			"B" : "America",
+			"C" : "Europe",
+			"D" : "12111231231"
+		};
+
+		var regionVue = new Vue({
+			el : "#regions",
+			data : {
+				regions : regions
+			}
 		});
 	</script>
 </body>

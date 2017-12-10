@@ -48,12 +48,6 @@ public class SpringConfig {
 		).andRoute(
 			RequestPredicates.GET("/condition"),
 			serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("condition")
-		).andNest(
-			RequestPredicates.GET("/vue"),
-			RouterFunctions.route(
-				RequestPredicates.GET("/loop"),
-				serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("loop")
-			)
 		);
 	}
 }
