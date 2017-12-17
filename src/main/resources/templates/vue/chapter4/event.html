@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue Js Condition (v-if, v-show, v-else, v-else-if)</title>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<body>
+<div id="example">
+    <p><input type="text" v-model="amount"/></p>
+    <p>
+        <button id="deposit" v-on:click="balance += parseInt(amount)">예금</button>
+        <button id="withdraw" v-on:click="balance -= parseInt(amount)">인출</button>
+    </p>
+    <h3 v-text="balance"></h3>
+</div>
+
+<div id="eventHandler">
+    <p><input type="text" v-model="amount"/></p>
+    <p>
+        <button id="deposit" v-on:click="deposit">예금</button>
+        <button id="withdraw" @click="withdraw">인출</button>
+    </p>
+    <h3 v-text="balance"></h3>
+</div>
+
+<script>
+    var account = new Vue({
+        el : "#example",
+        data : {
+            amount : 0,
+            balance : 0
+        }
+    });
+
+    var accountHandler = new Vue({
+        el : "#eventHandler",
+        data : {
+            amount : 0,
+            balance : 0
+        },
+        methods : {
+            deposit : function() {
+                var amount = parseInt(this.amount) || 0;
+                if (amount <= 0) {
+                    alert("0보다 큰 값 입력");
+                } else {
+                    this.balance += amount;
+                }
+            },
+        withdraw : function() {
+                var amount = parseInt(this.amount) || 0;
+                if (amount <= 0) {
+                    alert("0, 음수 인출 불가");
+                } else if (amount > this.amount) {
+                    alert("잔고보다 많은 양을 인출 불가")
+                } else {
+                    this.balance -= amount;
+                }
+            }
+
+        }
+    });
+</script>
+</body>
+</html>

@@ -33,6 +33,9 @@ public class VueRouterConfig {
 			).andRoute(
 				RequestPredicates.GET("/lifecycle"),
 				serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("lifecycle")
+			).andRoute(
+				RequestPredicates.GET("/ch4/event"),
+				serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("vue/chapter4/event")
 			)
 		);
 	}
