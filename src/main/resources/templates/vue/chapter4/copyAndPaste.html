@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Condition (copy and paste)</title>
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+<body>
+<div id="example">
+	<input type="text" v-model="comment"/><button v-on:keyup.ctrl.67="copyText">복사</button><br>
+	<span v-text="comment"></span><br> <!-- v-text는 span같은 얘들한테 쓸때!-->
+	<input type="text" v-bind:value="comment" readonly/><br>
+	<input type="text" readonly/>붙여넣기 못함<br>
+	<input type="text" v-bind:value="comment2" readonly v-on:keyup.ctrl.86="pasteText"/>붙여넣기 가능<br>
+
+</div>
+
+<script>
+	var copyAndPaste = new Vue({
+		el : "#example",
+		data : {
+			comment : "",
+			comment2 : ""
+		},
+		methods : {
+			copyText : function(e) {
+				console.log("복사!", e);
+			},
+			pasteText : function(e) {
+				console.log("붙여넣기!", e);
+				this.comment2 = this.comment;
+			}
+		}
+	});
+</script>
+</body>
+</html>

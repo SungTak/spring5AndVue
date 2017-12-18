@@ -8,10 +8,12 @@
 <body>
 <div id="example">
 	<input type="text" v-model="num"/>
+	<span>{{multi}}</span></br>
+	<span>{{multi3()}}</span></br>
 </div>
 
 <script>
-	new Vue({
+	var life = new Vue({
 		el : "#example",
 		data : { num : 0 },
 		beforeCreate : function(){
@@ -37,6 +39,18 @@
 		},
 		destroyed : function () {
 			console.log("destroyed");
+		},
+		computed : {
+			multi : function() {
+				console.log("call computed multi");
+				return this.num * 2;
+			}
+		},
+		methods : {
+			multi3 : function() {
+				console.log("call methods multi * 3");
+				return this.num * 3;
+			}
 		}
 
 	});

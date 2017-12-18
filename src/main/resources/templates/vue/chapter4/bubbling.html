@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Condition (v-if, v-show, v-else, v-else-if)</title>
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+
+	<style>
+		#outer {
+			width: 200px; height: 200px; border: solid 2px black;
+			background-color: deepskyblue;
+			top: 100px;
+			left: 50px;
+			padding: 10px 10px 10px 10px;
+		}
+
+		#inner {
+			width: 100px;
+			height: 100px;
+			border: solid 2px black;
+			background-color: darkorange;
+		}
+
+		.outer {
+			width: 200px; height: 200px; border: solid 2px black;
+			background-color: mediumpurple;
+			top: 100px;
+			left: 50px;
+			padding: 10px 10px 10px 10px;
+		}
+
+		.inner {
+			width: 100px;
+			height: 100px;
+			border: solid 2px black;
+			background-color: seagreen;
+		}
+	</style>
+</head>
+<body>
+<div id="example">
+	<div id="outer" v-on:click="outerClick">
+		<div id="inner" v-on:click="innerClick"></div>
+	</div>
+</div>
+
+<div id="notBubbling">
+	<div class="outer" v-on:click="outerClick">
+		<div class="inner" v-on:click.stop="innerClick"></div>
+	</div>
+</div>
+
+<script>
+	var bubbling = new Vue({
+		el : "#example",
+		methods : {
+			outerClick : function(e) {
+				console.log("### OUTER CLICK");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+			},
+			innerClick : function(e) {
+				console.log("### INNER CLICK");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+			}
+		}
+	});
+
+	var bubbling = new Vue({
+		el : "#notBubbling",
+		methods : {
+			outerClick : function(e) {
+				console.log("### OUTER CLICK (NOT Bubbling)");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+				e.stopPropagation();
+			},
+			innerClick : function(e) {
+				console.log("### INNER CLICK (NOT Bubbling)");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+			}
+		}
+	});
+</script>
+</body>
+</html>

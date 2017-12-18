@@ -8,7 +8,7 @@
 <body>
 	<div id="account">
 		금액 ~~~~~~ : <input type="text" v-model="amount" />
-		<img v-if="amount < 0" src="/img/ryon.gif" title="음수는 불가" />
+		<img v-if="amount < 0 && amount > -20" src="/img/ryon.gif" title="음수는 불가" />
 	</div>
 
 	<div id="balance">

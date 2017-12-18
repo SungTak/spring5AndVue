@@ -9,8 +9,8 @@
 <div id="example">
     <p><input type="text" v-model="amount"/></p>
     <p>
-        <button id="deposit" v-on:click="balance += parseInt(amount)">예금</button>
-        <button id="withdraw" v-on:click="balance -= parseInt(amount)">인출</button>
+        <button v-on:click="balance += parseInt(amount)">예금</button>
+        <button v-on:click="balance -= parseInt(amount)">인출</button>
     </p>
     <h3 v-text="balance"></h3>
 </div>
@@ -18,10 +18,16 @@
 <div id="eventHandler">
     <p><input type="text" v-model="amount"/></p>
     <p>
-        <button id="deposit" v-on:click="deposit">예금</button>
-        <button id="withdraw" @click="withdraw">인출</button>
+        <button v-on:click="deposit">예금</button>
+        <button @click="withdraw">인출</button>
     </p>
     <h3 v-text="balance"></h3>
+</div>
+
+<div id="eventPrevent" v-on:contextmenu="ctxStop">
+    <p><a href="https://facebook.com" target="_blank" @click="moveToFaceBook">페이스북</a></p>
+    <p><a href="https://www.naver.com" target="_blank" @click.prevent="bindNaver">네이버로 이동 불가</a></p>
+    <p><a href="https://www.naver.com" target="_blank" @click.once.prevent="once">1번만호출</a></p>
 </div>
 
 <script>
@@ -59,6 +65,29 @@
                 }
             }
 
+        }
+    });
+
+    var clickPrevent = new Vue({
+        el : "#eventPrevent",
+        methods : {
+        	ctxStop : function(e) {
+        		console.log("마우스 오른쪽 버튼 클릭", e);
+        		e.preventDefault();
+            },
+        	moveToFaceBook : function(e) {
+        		console.log(e);
+
+        		if (confirm("페이스북으로 이동할까요?") === false) {
+        			e.preventDefault();
+                }
+            },
+            bindNaver : function(e) {
+                console.log("이동못해요..클릭", e);
+            },
+            once : function(e) {
+        		alert("1번호출 끝!, 이동도 안함! 하지만 다음부턴 호출, 함수 호출을 안할뿐 기본 이벤트는 적용됨!");
+            }
         }
     });
 </script>

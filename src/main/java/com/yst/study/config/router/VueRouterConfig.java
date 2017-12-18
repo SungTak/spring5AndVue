@@ -34,8 +34,17 @@ public class VueRouterConfig {
 				RequestPredicates.GET("/lifecycle"),
 				serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("lifecycle")
 			).andRoute(
+				RequestPredicates.GET("/condition"),
+				serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("condition")
+			).andRoute(
 				RequestPredicates.GET("/ch4/event"),
 				serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("vue/chapter4/event")
+			).andRoute(
+				RequestPredicates.GET("/ch4/bubbling"),
+				serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("vue/chapter4/bubbling")
+			).andRoute(
+				RequestPredicates.GET("/ch4/copy"),
+				serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("vue/chapter4/copyAndPaste")
 			)
 		);
 	}
