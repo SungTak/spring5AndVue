@@ -45,6 +45,12 @@ public class VueRouterConfig {
 			).andRoute(
 				RequestPredicates.GET("/ch4/copy"),
 				serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("vue/chapter4/copyAndPaste")
+			).andRoute(
+				RequestPredicates.GET("/ch5/class"),
+				serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("vue/chapter5/classBind")
+			).andRoute(
+				RequestPredicates.GET("/ch5/todo"),
+				serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("vue/chapter5/todo")
 			)
 		);
 	}

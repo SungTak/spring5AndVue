@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Js Condition (copy and paste)</title>
+	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="/css/chapter5/todo.css"/>
+</head>
+<body>
+<div id="todolistapp">
+	<div id="header" class="header">
+		<h2>Todo List App</h2>
+		<input class="input" type="text" id="task" placeholder="입력 후 엔터!">
+		<span class="addbutton">추 가</span>
+	</div>
+	<ul id="todolist">
+		<li>
+			<span>Task 1</span>
+			<span class="close">&#x00D7;</span>
+		</li>
+		<li class="checked">
+			<span>Task2</span>
+			<span> (완료)</span>
+			<span class="close">&#x00D7;</span>
+		</li>
+		<li>
+			<span>Task3</span>
+			<span class="close">&#x00D7;</span>
+		</li>
+	</ul>
+</div>
+
+<script>
+	var classBind = new Vue({
+		el : "#example",
+		data : {
+			s1 : false,
+			s2 : false,
+			s3 : false
+		}
+	});
+</script>
+</body>
+</html>
