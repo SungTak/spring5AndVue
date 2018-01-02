@@ -11,33 +11,41 @@
 <div id="todolistapp">
 	<div id="header" class="header">
 		<h2>Todo List App</h2>
-		<input class="input" type="text" id="task" placeholder="입력 후 엔터!">
-		<span class="addbutton">추 가</span>
+		<input class="input" type="text" id="task" v-model="inputTodoElement.title" placeholder="입력 후 엔터!">
+		<span class="addbutton" v-on:click="add">추가</span>
 	</div>
 	<ul id="todolist">
-		<li>
-			<span>Task 1</span>
-			<span class="close">&#x00D7;</span>
+		<template v-for="(todo, index) in list">
+		<li v-on:click="toggleCheck(index)" v-bind:class="{ checked:todo.isComplete }">
+			<span>{{todo.title}}</span>
+			<span v-if="todo.isComplete"> (완료)</span>
+			<span class="close" v-on:click.stop="del(index)">&#x00D7;</span>
 		</li>
-		<li class="checked">
-			<span>Task2</span>
-			<span> (완료)</span>
-			<span class="close">&#x00D7;</span>
-		</li>
-		<li>
-			<span>Task3</span>
-			<span class="close">&#x00D7;</span>
-		</li>
+		</template>
 	</ul>
 </div>
 
 <script>
-	var classBind = new Vue({
-		el : "#example",
+	var todo = new Vue({
+		el : "#todolistapp",
 		data : {
-			s1 : false,
-			s2 : false,
-			s3 : false
+			list : [],
+			inputTodoElement : {
+				title : "",
+				isComplete : false
+			}
+		},
+		methods : {
+			add : function() {
+				this.list.push({ title : this.inputTodoElement.title, isComplete : this.inputTodoElement.isComplete });
+			},
+			del : function(index) {
+				this.list.splice(index, 1);
+			},
+			toggleCheck : function(index) {
+				this.list[index].isComplete = !this.list[index].isComplete;
+				return this.list[index].isComplete;
+			}
 		}
 	});
 </script>
