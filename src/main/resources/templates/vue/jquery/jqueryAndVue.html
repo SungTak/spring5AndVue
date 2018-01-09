@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue and jQuery</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+	<style>
+		.outer {
+			width: 200px; height: 200px; border: solid 2px black;
+			background-color: mediumpurple;
+			top: 100px;
+			left: 50px;
+			padding: 10px 10px 10px 10px;
+		}
+
+		.inner {
+			width: 100px;
+			height: 100px;
+			border: solid 2px black;
+			background-color: seagreen;
+		}
+	</style>
+</head>
+<body>
+<div id="example">
+	<div class="outer" v-on:click="outerClick">
+		<div class="inner" v-on:click="innerClick"></div>
+	</div>
+</div>
+
+<div id="examplejQuery">
+	<div id="outer" class="outer">
+		<div id="inner" class="inner"></div>
+	</div>
+</div>
+
+<div id="mix">
+	<div id="outerMix" class="outer" v-on:click="outerClick">
+		<div id="innerMix" class="inner" v-on:click="innerClick"></div>
+	</div>
+</div>
+
+<script>
+	Vue.config.devtools = true;
+
+	var example = new Vue({
+		el : "#example",
+		methods : {
+			outerClick : function(e) {
+				console.log("### OUTER CLICK");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+			},
+			innerClick : function(e) {
+				console.log("### INNER CLICK (Bubbling)");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+			}
+		}
+	});
+
+	$("#examplejQuery #outer").on("click", function(e) {
+		console.log("### jQuery OUTER Click");
+		console.log(e);
+	});
+
+	$("#examplejQuery #inner").on("click", function(e) {
+		console.log("### jQuery INNER Click");
+		console.log(e);
+	});
+
+	var mix = new Vue({
+		el : "#mix",
+		methods : {
+			outerClick : function(e) {
+				console.log("### OUTER CLICK");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+
+				$("#mix #outerMix").on("click", function(e) {
+					console.log("### jQuery adfadfafasfafaf OUTER Click");
+					console.log(e);
+				});
+			},
+			innerClick : function(e) {
+				console.log("### INNER CLICK (Bubbling)");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+			}
+		}
+	});
+
+	/*
+	$("#mix #outerMix").on("click", function(e) {
+		console.log("### jQuery mix OUTER Click");
+		console.log(e);
+	});
+
+	$("#mix #innerMix").on("click", function(e) {
+		console.log("### jQuery mix INNER Click");
+		console.log(e);
+	});*/
+</script>
+</body>
+</html>

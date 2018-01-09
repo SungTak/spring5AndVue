@@ -51,6 +51,9 @@ public class VueRouterConfig {
 			).andRoute(
 				RequestPredicates.GET("/ch5/todo"),
 				serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("vue/chapter5/todo")
+			).andRoute(
+				RequestPredicates.GET("/jquery/click"),
+				serverRequest -> ServerResponse.ok().contentType(MediaType.TEXT_HTML).render("vue/jquery/jqueryAndVue")
 			)
 		);
 	}

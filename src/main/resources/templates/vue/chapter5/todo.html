@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Vue Js Condition (copy and paste)</title>
-	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="/css/chapter5/todo.css"/>
 </head>
@@ -26,6 +26,8 @@
 </div>
 
 <script>
+	Vue.config.devtools = true;
+
 	var todo = new Vue({
 		el : "#todolistapp",
 		data : {

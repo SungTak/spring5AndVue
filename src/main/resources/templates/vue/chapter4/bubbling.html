@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Vue Js Condition (v-if, v-show, v-else, v-else-if)</title>
-	<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 
 	<style>
 		#outer {
@@ -50,7 +50,29 @@
 	</div>
 </div>
 
+<div id="capturing">
+	<!-- 아래 코드는 캡처링 막음 -->
+	<div class="outer" v-on:click.capture.stop="outerClick">
+		<div class="inner" v-on:click.stop="innerClick"></div>
+	</div>
+</div>
+
+<div id="self">
+	SELF
+	<div class="outer" v-on:click="outerClick">
+		<div class="inner" v-on:click.self.stop="innerClick"></div>
+	</div>
+</div>
+
+<div id="atag">
+	<div class="outer" v-on:click="outerClick">
+		<a href="https://www.naver.com" target="_blank" class="inner" v-on:click.prevent="innerClick">NAVER</a>
+	</div>
+</div>
+
 <script>
+	Vue.config.devtools = true;
+
 	var bubbling = new Vue({
 		el : "#example",
 		methods : {
@@ -81,6 +103,60 @@
 			},
 			innerClick : function(e) {
 				console.log("### INNER CLICK (NOT Bubbling)");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+			}
+		}
+	});
+
+	var capture = new Vue({
+		el : "#capturing",
+		methods : {
+			outerClick : function(e) {
+				console.log("### OUTER CLICK (NOT Capturing)");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+			},
+			innerClick : function(e) {
+				console.log("### INNER CLICK (NOT Bubbling)");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+			}
+		}
+	});
+
+	var self = new Vue({
+		el : "#self",
+		methods : {
+			outerClick : function(e) {
+				console.log("### OUTER CLICK");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+			},
+			innerClick : function(e) {
+				console.log("### INNER CLICK (NOT Self Bubbling)");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+			}
+		}
+	});
+
+	var atag = new Vue({
+		el : "#atag",
+		methods : {
+			outerClick : function(e) {
+				console.log("### OUTER CLICK");
+				console.log(e.eventPhase);
+				console.log(e.currentTarget);
+				console.log(e.target);
+			},
+			innerClick : function(e) {
+				console.log("### INNER CLICK (Bubbling)");
 				console.log(e.eventPhase);
 				console.log(e.currentTarget);
 				console.log(e.target);
