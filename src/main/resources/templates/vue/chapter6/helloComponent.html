@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+</head>
+<script>
+	Vue.component('hello-component', {
+		template : '<div>hello world</div>'
+	});
+</script>
+<body>
+	<div id="app">
+		<hello-component></hello-component>
+		<hello-component></hello-component>
+		<hello-component></hello-component>
+	</div>
+
+<script>
+	Vue.config.devtools = true;
+	var v = new Vue({
+		el : '#app'
+	});
+	// cmd를 열고 npm install -g live-server 설치한다.
+	// 디렉터리에서 live-server 명령어를 수행한다.
+</script>
+</body>
+</html>
