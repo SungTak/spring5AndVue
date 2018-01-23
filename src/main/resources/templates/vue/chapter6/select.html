@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+</head>
+<script>
+	Vue.component('option-component', {
+		template : '<option>A</option>'
+	});
+
+	Vue.component('select-component', {
+		template : '#selectTemplate'
+	});
+</script>
+<body>
+<div id="app">
+	<!-- ERROR Select는 기존 Dom으로 브라우저가 먼저 검증할때 잘못된 하위 Dom이라고 판단함 -->
+	<select>
+		<option-component></option-component>
+		<option-component></option-component>
+		<option-component></option-component>
+		<option is="option-component"></option>
+		<option is="option-component"></option>
+		<option is="option-component"></option>
+	</select>
+</div>
+
+<div id="appTemplate">
+	<select-component></select-component>
+</div>
+
+<!-- 주의! template은 is로 해결해야한다 -->
+<script type="text/x-template" id="selectTemplate">
+<!--<template id="selectTemplate">-->
+	<select>
+		<option-component></option-component>
+		<option-component></option-component>
+		<option-component></option-component>
+	</select>
+<!--</template>-->
+ </script>
+<script>
+	Vue.config.devtools = true;
+	var v = new Vue({
+		el : '#app'
+	});
+
+	var template = new Vue({
+		el : "#appTemplate"
+	});
+</script>
+</body>
+</html>

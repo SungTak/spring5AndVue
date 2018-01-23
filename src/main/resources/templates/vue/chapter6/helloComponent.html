@@ -8,6 +8,10 @@
 	Vue.component('hello-component', {
 		template : '<div>hello world</div>'
 	});
+
+	Vue.component('hello-template', {
+		template : '#helloTemplate'
+	});
 </script>
 <body>
 	<div id="app">
@@ -15,7 +19,15 @@
 		<hello-component></hello-component>
 		<hello-component></hello-component>
 	</div>
+	<div id="appTemplate">
+		<hello-template></hello-template>
+		<hello-template></hello-template>
+		<hello-template></hello-template>
+	</div>
 
+<template id="helloTemplate">
+	<div>Test Template</div>
+</template>
 <script>
 	Vue.config.devtools = true;
 	var v = new Vue({
@@ -23,6 +35,10 @@
 	});
 	// cmd를 열고 npm install -g live-server 설치한다.
 	// 디렉터리에서 live-server 명령어를 수행한다.
+
+	var template = new Vue({
+		el : "#appTemplate"
+	});
 </script>
 </body>
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+</head>
+<script>
+	// props는 카멜로 작성하더라도 html에선 케밥으로 표기해야됨, props array방식
+	Vue.component("list-component", {
+		template : "#listTemplate",
+		props : ["message", "myTest"]
+	});
+
+	Vue.component("ol-list-component", {
+		template : "#olTemplate",
+		props : {
+			message : { type : String, default : "Hi" },
+			count : { type : Number, required : true }
+		}
+	});
+</script>
+<body>
+
+<ul id="app">
+	<list-component message="하하하하" my-test="호호호호"></list-component>
+	<list-component message="12345" myTest="안돼요"></list-component>
+	<list-component message="AbcDEFZZZ" my-test="OPQRSTUV"></list-component>
+</ul>
+
+<ol id="olApp">
+	<ol-list-component v-bind:count="100"></ol-list-component>
+	<ol-list-component message="o_o" count="23"></ol-list-component>
+	<ol-list-component message="호호호" v-bind:count="-1"></ol-list-component>
+	<ol-list-component message="required"></ol-list-component>
+</ol>
+
+<template id="listTemplate">
+	<li>{{message}} {{myTest}}</li>
+</template>
+<template id="olTemplate">
+	<li v-text="message"></li>
+</template>
+<script>
+	Vue.config.devtools = true;
+
+	var v = new Vue({
+		el : "#app"
+	});
+
+	var ol = new Vue({
+		el : "#olApp"
+	});
+</script>
+</body>
+</html>

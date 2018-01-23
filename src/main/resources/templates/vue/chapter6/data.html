@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+</head>
+<script>
+	Vue.component('time-component', {
+		template : "#timeTemplate",
+		data : function() {
+			return { now : 0 };
+		},
+		methods : {
+			timeClick : function() {
+				this.now = new Date();
+			}
+		}
+	});
+</script>
+<body>
+
+<div id="app">
+	<time-component></time-component>
+	<time-component></time-component>
+</div>
+
+<template id="timeTemplate">
+	<div>
+		<span>{{now}}</span>
+		<button v-on:click="timeClick">현재시간</button>
+	</div>
+</template>
+
+<script>
+	Vue.config.devtools = true;
+
+	var v = new Vue({
+		el : '#app'
+	});
+</script>
+</body>
+</html>
